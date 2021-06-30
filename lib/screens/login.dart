@@ -1,6 +1,7 @@
 import 'package:car_rental_app/components/bottom_auth_row.dart';
 import 'package:car_rental_app/components/email_text_input.dart';
 import 'package:car_rental_app/components/my_button.dart';
+import 'package:car_rental_app/components/password_text_input.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
@@ -15,6 +16,9 @@ String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 RegExp regExp = RegExp(p);
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+String? email;
+String? password;
 
 class _LoginState extends State<Login> {
   bool hideText = true;
@@ -57,26 +61,26 @@ class _LoginState extends State<Login> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      EmailTextInput(),
-                      InputTextField(
-                        hideText: () {
+                      EmailTextInput(
+                        onChanged: (value) {
                           setState(() {
-                            hideText = !hideText;
+                            email = value;
                           });
+                          print(email);
                         },
-                        iconData: Icons.lock,
-                        suffixIcon: hideText == true
+                      ),
+                      //Password text input field
+                      PasswordInputField(
+                        onChanged: (value) {
+                          setState(() {
+                            password = value;
+                          });
+                          print(password);
+                        },
+                        hideText: true,
+                        iconData: hideText == true
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        hiddenText: hideText == true ? true : false,
-                        keyBoardType: TextInputType.visiblePassword,
-                        validator: (value) {
-                          if (value!.length < 6) {
-                            return "Try a stronger password";
-                          }
-                          return "";
-                        },
-                        hint: 'Password',
                       ),
                       // button to login
                       ReUsableButton(
@@ -88,7 +92,7 @@ class _LoginState extends State<Login> {
                       // Row to toggle btwn login and signup
                       BottomRow(
                         name: 'SignUp',
-                        description: 'I have an account.',
+                        description: 'I don\'t have an account.',
                         onPressed: () {
                           Route route =
                               MaterialPageRoute(builder: (c) => SignUp());

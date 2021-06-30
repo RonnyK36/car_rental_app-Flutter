@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "994559294637",
+    "project_id": "car-rental-app-ee195",
+    "storage_bucket": "car-rental-app-ee195.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994559294637:android:90d6260423897953af5a24",
+        "android_client_info": {
+          "package_name": "com.nerdherd.car_rental_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994559294637-8icgmj1btadpc2rvo6fd6ittid3cnead.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaiN9W4F5TsiLpwjHd3QwAtWeslAAgIbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994559294637-8icgmj1btadpc2rvo6fd6ittid3cnead.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

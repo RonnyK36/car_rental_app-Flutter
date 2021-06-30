@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class InputTextField extends StatelessWidget {
   InputTextField({
+    required this.onChanged,
     required this.hint,
     required this.validator,
     required this.keyBoardType,
@@ -10,7 +11,6 @@ class InputTextField extends StatelessWidget {
     required this.iconData,
     this.suffixIcon,
     this.hideText,
-    this.checker,
   });
 
   final String hint;
@@ -20,14 +20,14 @@ class InputTextField extends StatelessWidget {
   final IconData iconData;
   final IconData? suffixIcon;
   final VoidCallback? hideText;
-  final VoidCallback? checker;
+  final ValueChanged onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       keyboardType: keyBoardType,
       validator: validator,
-      onEditingComplete: checker,
       obscureText: hiddenText,
       decoration: InputDecoration(
         prefixIcon: Icon(iconData),

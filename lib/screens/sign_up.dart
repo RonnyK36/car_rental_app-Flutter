@@ -13,13 +13,19 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
 RegExp regExp = RegExp(p);
+String? email;
+String? password;
+String? username;
+String? phone;
 
 class _SignUpState extends State<SignUp> {
+  get value => null;
+
   void validation() {
     final FormState? _form = _formKey.currentState;
     if (_form!.validate()) {
@@ -27,6 +33,92 @@ class _SignUpState extends State<SignUp> {
     } else {
       print('Failed');
     }
+  }
+
+  Widget _buildTextFormFields() {
+    return Container(
+      height: 350,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          InputTextField(
+            onChanged: (value) {
+              setState(() {
+                username = value;
+              });
+              print(username);
+              // validation();
+            },
+            iconData: Icons.person,
+            hiddenText: false,
+            validator: (value) {
+              if (value!.length < 4) {
+                return "Username is too short";
+              } else if (value == '') {
+                return "Please add your name";
+              }
+              return '';
+            },
+            keyBoardType: TextInputType.name,
+            hint: 'Username',
+          ),
+          EmailTextInput(
+            onChanged: (value) {
+              setState(() {
+                email = value;
+              });
+              print(email);
+              // validation();
+            },
+          ),
+          InputTextField(
+            onChanged: (value) {
+              setState(() {
+                username = value;
+              });
+              print(password);
+            },
+            hideText: () {
+              setState(() {
+                hideText = !hideText;
+              });
+            },
+            iconData: Icons.lock,
+            suffixIcon:
+                hideText == true ? Icons.visibility : Icons.visibility_off,
+            hiddenText: hideText == true ? true : false,
+            keyBoardType: TextInputType.visiblePassword,
+            validator: (value) {
+              if (value!.length < 6) {
+                return "Try a stronger password";
+              }
+              return "";
+            },
+            hint: 'Password',
+          ),
+          InputTextField(
+            onChanged: (value) {
+              setState(() {
+                phone = value;
+              });
+              print(phone);
+            },
+            iconData: Icons.phone,
+            hiddenText: false,
+            validator: (value) {
+              if (value!.length < 10) {
+                return "Invalid phone number";
+              } else if (value == '') {
+                return 'Phone number cannot be blank';
+              }
+              return '';
+            },
+            keyBoardType: TextInputType.phone,
+            hint: 'Phone number',
+          ),
+        ],
+      ),
+    );
   }
 
   bool hideText = true;
@@ -65,55 +157,7 @@ class _SignUpState extends State<SignUp> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        InputTextField(
-                          iconData: Icons.person,
-                          hiddenText: false,
-                          validator: (value) {
-                            if (value!.length < 4) {
-                              return "Username is too short";
-                            } else if (value == '') {
-                              return "Please add your name";
-                            }
-                            return '';
-                          },
-                          keyBoardType: TextInputType.name,
-                          hint: 'Username',
-                        ),
-                        EmailTextInput(),
-                        InputTextField(
-                          hideText: () {
-                            setState(() {
-                              hideText = !hideText;
-                            });
-                          },
-                          iconData: Icons.lock,
-                          suffixIcon: hideText == true
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          hiddenText: hideText == true ? true : false,
-                          keyBoardType: TextInputType.visiblePassword,
-                          validator: (value) {
-                            if (value!.length < 6) {
-                              return "Try a stronger password";
-                            }
-                            return "";
-                          },
-                          hint: 'Password',
-                        ),
-                        InputTextField(
-                          iconData: Icons.phone,
-                          hiddenText: false,
-                          validator: (value) {
-                            if (value!.length < 11) {
-                              return "Invalid phone number";
-                            } else if (value == '') {
-                              return 'Phone number cannot be blank';
-                            }
-                            return '';
-                          },
-                          keyBoardType: TextInputType.phone,
-                          hint: 'Phone number',
-                        ),
+                        _buildTextFormFields(),
                         ReUsableButton(
                           name: 'SignUp',
                           onPressed: () {
@@ -124,9 +168,7 @@ class _SignUpState extends State<SignUp> {
                           name: 'Login',
                           description: 'Already have an account?',
                           onPressed: () {
-                            Route route =
-                                MaterialPageRoute(builder: (c) => Login());
-                            Navigator.push(context, route);
+                            Navigator.pop(context);
                           },
                         ),
                       ],

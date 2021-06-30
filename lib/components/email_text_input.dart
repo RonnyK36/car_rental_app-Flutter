@@ -3,14 +3,14 @@ import 'package:car_rental_app/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 
 class EmailTextInput extends StatelessWidget {
-  const EmailTextInput({
-    Key? key,
-  }) : super(key: key);
+  EmailTextInput({required this.onChanged});
+
+  final ValueChanged onChanged;
 
   @override
   Widget build(BuildContext context) {
     return InputTextField(
-      checker: () {},
+      onChanged: onChanged,
       iconData: Icons.email,
       hiddenText: false,
       validator: (value) {
