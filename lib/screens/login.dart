@@ -1,4 +1,6 @@
+import 'package:car_rental_app/components/bottom_auth_row.dart';
 import 'package:car_rental_app/components/email_text_input.dart';
+import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
@@ -76,31 +78,22 @@ class _LoginState extends State<Login> {
                         },
                         hint: 'Password',
                       ),
-                      Container(
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            validation();
-                          },
-                          child: Text(
-                            'Login',
-                            style: kButtonTextStyle,
-                          ),
-                        ),
+                      // button to login
+                      ReUsableButton(
+                        onPressed: () {
+                          validation();
+                        },
+                        name: 'Login',
                       ),
-                      Row(
-                        children: [
-                          Text('I have no account.'),
-                          TextButton(
-                            onPressed: () {
-                              Route route =
-                                  MaterialPageRoute(builder: (c) => SignUp());
-                              Navigator.push(context, route);
-                            },
-                            child: Text('Sign Up'),
-                          ),
-                        ],
+                      // Row to toggle btwn login and signup
+                      BottomRow(
+                        name: 'SignUp',
+                        description: 'I have an account.',
+                        onPressed: () {
+                          Route route =
+                              MaterialPageRoute(builder: (c) => SignUp());
+                          Navigator.push(context, route);
+                        },
                       ),
                     ],
                   ),
