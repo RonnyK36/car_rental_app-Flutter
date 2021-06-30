@@ -3,8 +3,10 @@ import 'package:car_rental_app/components/email_text_input.dart';
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'login.dart';
 
@@ -24,12 +26,16 @@ String? username;
 String? phone;
 
 class _SignUpState extends State<SignUp> {
-  get value => null;
-
-  void validation() {
+  void validation() async {
     final FormState? _form = _formKey.currentState;
-    if (_form!.validate()) {
-      print("Success");
+    if (!_form!.validate()) {
+      try {
+        UserCredential result = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email!, password: password!);
+        print(result.user!.uid);
+      } on PlatformException catch (e) {
+        print(e.message.toString());
+      }
     } else {
       print('Failed');
     }
@@ -74,7 +80,7 @@ class _SignUpState extends State<SignUp> {
           InputTextField(
             onChanged: (value) {
               setState(() {
-                username = value;
+                password = value;
               });
               print(password);
             },
