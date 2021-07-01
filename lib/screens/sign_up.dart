@@ -2,13 +2,12 @@ import 'package:car_rental_app/components/bottom_auth_row.dart';
 import 'package:car_rental_app/components/email_text_input.dart';
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'login.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -16,6 +15,7 @@ class SignUp extends StatefulWidget {
 }
 
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
@@ -32,12 +32,20 @@ class _SignUpState extends State<SignUp> {
       try {
         UserCredential result = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email!, password: password!);
-        print(result.user!.uid);
+        print(result.user!.email);
+        print(result.user!.phoneNumber);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => HomePage(
+                      email: result.user!.email,
+                    )));
       } on PlatformException catch (e) {
         print(e.message.toString());
+        ScaffoldMessenger.of(context)
+            // _scaffoldKey.currentState!
+            .showSnackBar(SnackBar(content: Text(e.message!)));
       }
-    } else {
-      print('Failed');
     }
   }
 
@@ -82,7 +90,7 @@ class _SignUpState extends State<SignUp> {
               setState(() {
                 password = value;
               });
-              print(password);
+              // print(password);
             },
             hideText: () {
               setState(() {
@@ -132,6 +140,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: SafeArea(

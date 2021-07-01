@@ -10,3 +10,9 @@ const kTitleTextStyle = TextStyle(
   fontSize: 40,
   fontWeight: FontWeight.w600,
 );
+
+const kBodyTextStyle = TextStyle(
+  fontSize: 18,
+  color: Colors.black,
+  letterSpacing: 2,
+);
