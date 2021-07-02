@@ -1,3 +1,4 @@
+import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/screens/login.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +12,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final String userName = 'Kevin';
+  // final String email = 'ronny@gmail';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +22,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Login(),
+      home: HomePage(
+        // email: email,
+        userName: userName,
+      ),
     );
   }
 }
