@@ -12,6 +12,12 @@ class ReUsableButton extends StatelessWidget {
       height: 50,
       width: double.infinity,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          primary: Colors.green,
+        ),
         onPressed: onPressed,
         child: Text(
           name,

@@ -1,13 +1,26 @@
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/detail.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.email, this.userName}) : super(key: key);
+  HomePage(
+      {Key? key,
+      this.email,
+      this.userName,
+      this.name,
+      this.image,
+      this.price,
+      this.description})
+      : super(key: key);
   final String? email;
   final String? userName;
+  final String? name;
+  final String? image;
+  final String? description;
+  final double? price;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -297,10 +310,13 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           children: [
-                            _buildFeaturedCars(
-                                name: 'SUVs',
-                                image: 'car2.jpg',
-                                price: 4499.00),
+                            GestureDetector(
+                              onTap: () {},
+                              child: _buildFeaturedCars(
+                                  name: 'SUVs',
+                                  image: 'car2.jpg',
+                                  price: 4499.00),
+                            ),
                             _buildFeaturedCars(
                                 name: 'Saloon Cars',
                                 image: 'car5.jpg',

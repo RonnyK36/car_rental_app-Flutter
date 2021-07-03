@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 const kButtonTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 18,
+  wordSpacing: 2,
+  letterSpacing: 2,
   fontWeight: FontWeight.w600,
 );
 const kTitleTextStyle = TextStyle(

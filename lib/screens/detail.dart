@@ -1,8 +1,14 @@
+import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  final String? name;
+  final String? image;
+  final String? description;
+  final double? price;
+
+  DetailsPage({this.name, this.image, this.price, this.description});
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -39,8 +45,6 @@ class _DetailsPageState extends State<DetailsPage> {
           color: color,
           height: 50,
           width: 50,
-          // color: Colors.green,
-          // child: Center(child: Text(label)),
         ),
       ),
     );
@@ -93,7 +97,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         height: 250,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('images/projects-5.jpeg'),
+                            image: AssetImage(widget.image!),
                           ),
                         ),
                       ),
@@ -117,7 +121,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Race Car',
+                                widget.name!,
                                 style: kBodyTitlesTextStyle,
                               ),
                               SizedBox(
@@ -125,9 +129,9 @@ class _DetailsPageState extends State<DetailsPage> {
                               ),
                               Row(
                                 children: [
-                                  Text('Kshs.'),
+                                  Text('Kshs: '),
                                   Text(
-                                    '4999.00',
+                                    widget.price!.toStringAsFixed(2),
                                     style: kPriceTextStyle,
                                   ),
                                 ],
@@ -147,7 +151,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Wrap(
                   children: [
                     Text(
-                      'Performing hot reload. Syncing files to device SM J200F. Reloaded 1 of 595 libraries  2231ms. ViewRootImpl 5442. ViewPostImeInputStage \nACTIONDOWN',
+                      widget.description!,
                       style: kBodyTextStyle,
                     ),
                   ],
@@ -172,6 +176,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 child: Text(
                   'Type of drive: ',
@@ -191,6 +198,9 @@ class _DetailsPageState extends State<DetailsPage> {
                     _buildColorCards(color: Colors.red),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
                 child: Text(
@@ -226,19 +236,27 @@ class _DetailsPageState extends State<DetailsPage> {
                       style: kBodyTitlesTextStyle,
                     ),
                     GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (count < 5) {
-                              count++;
-                            }
-                          });
-                        },
-                        child: Icon(
-                          Icons.add,
-                          size: 30,
-                        )),
+                      onTap: () {
+                        setState(() {
+                          if (count < 5) {
+                            count++;
+                          }
+                        });
+                      },
+                      child: Icon(
+                        Icons.add,
+                        size: 30,
+                      ),
+                    ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ReUsableButton(
+                name: 'Book a ride',
+                onPressed: () {},
               ),
             ],
           ),

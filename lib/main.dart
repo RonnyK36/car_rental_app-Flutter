@@ -1,6 +1,7 @@
 import 'package:car_rental_app/screens/detail.dart';
 import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/screens/login.dart';
+import 'package:car_rental_app/screens/product_list.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DetailsPage(),
+      home: ListProducts(),
     );
   }
 }
