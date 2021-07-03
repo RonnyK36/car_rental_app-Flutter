@@ -12,8 +12,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  final String userName = 'Kevin';
-  // final String email = 'ronny@gmail';
+  final String userName = 'Anney';
+  // final String email = 'anney@gmail';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
