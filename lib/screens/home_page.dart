@@ -4,11 +4,16 @@ import 'package:car_rental_app/widgets/text_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key, this.email, this.userName}) : super(key: key);
   final String? email;
   final String? userName;
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   Widget _buildFeaturedCars(
@@ -55,13 +60,125 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  bool homeColor = true;
+  bool collectionColor = false;
+  bool contactUsColor = false;
+  bool aboutColor = false;
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _key,
       backgroundColor: Colors.white,
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage('images/vw.jpg'),
+              ),
+              accountName: Text(
+                'Kevin',
+                style: kBodyTitlesTextStyle,
+              ),
+              accountEmail: Text(
+                'ronny@gmail.com',
+                style: kBodyTextStyle,
+              ),
+              decoration: BoxDecoration(color: Colors.green),
+            ),
+            ListTile(
+              selected: homeColor,
+              enabled: true,
+              leading: Icon(Icons.home),
+              title: Text(
+                'Home',
+                style: TextStyle(
+                    fontSize: 17,
+                    color: homeColor ? Colors.blue : Colors.black),
+              ),
+              onTap: () {
+                setState(() {
+                  homeColor = true;
+                  collectionColor = false;
+                  contactUsColor = false;
+                  aboutColor = false;
+                });
+              },
+            ),
+            ListTile(
+              selected: collectionColor,
+              enabled: true,
+              leading: Icon(Icons.car_repair),
+              title: Text(
+                'Collection',
+                style: TextStyle(
+                    fontSize: 17,
+                    color: collectionColor ? Colors.blue : Colors.black),
+              ),
+              onTap: () {
+                setState(() {
+                  collectionColor = true;
+                  homeColor = false;
+                  contactUsColor = false;
+                  aboutColor = false;
+                });
+              },
+            ),
+            ListTile(
+              selected: contactUsColor,
+              enabled: true,
+              leading: Icon(Icons.phone),
+              title: Text(
+                'Contact us',
+                style: TextStyle(
+                    fontSize: 17,
+                    color: contactUsColor ? Colors.blue : Colors.black),
+              ),
+              onTap: () {
+                setState(() {
+                  contactUsColor = true;
+                  collectionColor = false;
+                  homeColor = false;
+                  aboutColor = false;
+                });
+              },
+            ),
+            ListTile(
+              selected: aboutColor,
+              enabled: true,
+              leading: Icon(Icons.info_outline),
+              title: Text(
+                'About',
+                style: TextStyle(
+                    fontSize: 17,
+                    color: aboutColor ? Colors.blue : Colors.black),
+              ),
+              onTap: () {
+                setState(() {
+                  aboutColor = true;
+                  collectionColor = false;
+                  contactUsColor = false;
+                  homeColor = false;
+                });
+              },
+            ),
+            ListTile(
+              enabled: true,
+              leading: Icon(Icons.logout),
+              title: Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.green[600],
         title: Row(
@@ -124,7 +241,7 @@ class HomePage extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Welcome, $userName!',
+                  'Welcome, ${widget.userName}!',
                   style: kBodyTextStyle,
                 ),
                 Container(
@@ -180,27 +297,14 @@ class HomePage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            // ListView(
-                            //   scrollDirection: Axis.horizontal,
-                            //   children: [
-                            //     _buildFeaturedCars(
-                            //         name: 'SUVs',
-                            //         image: 'car2.jpg',
-                            //         price: 4000.00),
-                            //     _buildFeaturedCars(
-                            //         name: 'Saloon Cars',
-                            //         image: 'car5.jpg',
-                            //         price: 5000.00),
-                            //   ],
-                            // ),
                             _buildFeaturedCars(
                                 name: 'SUVs',
                                 image: 'car2.jpg',
-                                price: 4000.00),
+                                price: 4499.00),
                             _buildFeaturedCars(
                                 name: 'Saloon Cars',
                                 image: 'car5.jpg',
-                                price: 5000.00),
+                                price: 5999.00),
                           ],
                         ),
                       ],

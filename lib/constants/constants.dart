@@ -32,4 +32,9 @@ const kCarTitleTextStyle = TextStyle(
   color: Colors.black,
   letterSpacing: 2,
 );
-const kSize = 100;
+const kPriceTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+  color: Colors.green,
+  letterSpacing: 2,
+);
