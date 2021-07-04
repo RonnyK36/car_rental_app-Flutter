@@ -1,11 +1,21 @@
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:car_rental_app/widgets/grid_view.dart' as myGrid;
 
 class ListProducts extends StatelessWidget {
-  const ListProducts({Key? key}) : super(key: key);
+  final String name;
+  final String? image;
+  final String? description;
+  final double? price;
 
-  Widget _buildFeaturedCars(
-      {required String name, required String image, required double price}) {
+  ListProducts({required this.name, this.image, this.price, this.description});
+
+  Widget _buildFeaturedCars({
+    required String name,
+    required String image,
+    required double price,
+    String? description,
+  }) {
     return Card(
       child: Container(
         height: 160,
@@ -24,15 +34,29 @@ class ListProducts extends StatelessWidget {
               ),
             ),
             Text(
-              price.toString(),
+              price.toStringAsFixed(2),
               style: kBodyTextStyle,
             ),
             Text(
               name,
               style: kCarTitleTextStyle,
             ),
+            Text(
+              description!,
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildCategories({required String name, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: CircleAvatar(
+        maxRadius: 25,
+        backgroundImage: AssetImage('images/$name.jpg'),
+        // backgroundColor: Colors.white,
       ),
     );
   }
@@ -47,7 +71,7 @@ class ListProducts extends StatelessWidget {
         backgroundColor: Colors.green,
         title: Text(
           'Products',
-          style: kBodyTitlesTextStyle,
+          style: kAppBarTitleTextStyle,
         ),
         leading: IconButton(
           onPressed: () {
@@ -55,7 +79,7 @@ class ListProducts extends StatelessWidget {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         actions: [
@@ -63,14 +87,14 @@ class ListProducts extends StatelessWidget {
             onPressed: () {},
             icon: Icon(
               Icons.search_outlined,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           IconButton(
             onPressed: () {},
             icon: Icon(
               Icons.notifications_none,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ],
@@ -107,19 +131,37 @@ class ListProducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        children: [
-                          _buildFeaturedCars(
-                            name: 'SUVs',
-                            image: 'car2.jpg',
-                            price: 4499.00,
-                          ),
-                          _buildFeaturedCars(
-                              name: 'Saloon Cars',
+                      height: 800,
+                      width: 350,
+                      child: myGrid.MyGrid(
+                        child: Column(
+                          children: [
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'car3.jpg',
+                              price: 4499.00,
+                              description: 'This is the description.',
+                            ),
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'car2.jpg',
+                              price: 4499.00,
+                              description: 'This is the description.',
+                            ),
+                            _buildFeaturedCars(
+                              name: 'SUVs',
                               image: 'car5.jpg',
-                              price: 5999.00),
-                        ],
+                              price: 4499.00,
+                              description: 'This is the description.',
+                            ),
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'images/projects-5.jpeg',
+                              price: 4499.00,
+                              description: 'This is the description.',
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
