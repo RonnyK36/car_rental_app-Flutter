@@ -1,4 +1,5 @@
 import 'package:car_rental_app/screens/cart_screen.dart';
+import 'package:car_rental_app/screens/check_out.dart';
 import 'package:car_rental_app/screens/detail.dart';
 import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/screens/login.dart';
@@ -25,7 +26,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: CheckOut(
+        name: 'Alfa Romeo',
+        image: 'car5.jpg',
+        price: 3000,
+        type: 'Luxury',
+      ),
     );
   }
 }

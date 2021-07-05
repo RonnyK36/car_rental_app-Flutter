@@ -1,14 +1,13 @@
-import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-class CartScreen extends StatefulWidget {
+class CheckOut extends StatefulWidget {
   final double price;
   final String image;
   final String name;
   final String type;
 
-  CartScreen({
+  CheckOut({
     required this.image,
     required this.price,
     required this.name,
@@ -16,12 +15,11 @@ class CartScreen extends StatefulWidget {
   });
 
   @override
-  _CartScreenState createState() => _CartScreenState();
+  _CheckOutState createState() => _CheckOutState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CheckOutState extends State<CheckOut> {
   int count = 1;
-
   Widget _buildSingleCarSelection() {
     return Container(
       height: 160,
@@ -53,8 +51,9 @@ class _CartScreenState extends State<CartScreen> {
                 Expanded(
                   flex: 6,
                   child: Container(
-                    height: 150,
-                    width: 170,
+                    height: 130,
+                    width: double.infinity,
+                    // width: 145,
                     child: ListTile(
                       title: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -86,39 +85,17 @@ class _CartScreenState extends State<CartScreen> {
                             width: 150,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.green[200],
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (count > 1) {
-                                          count--;
-                                        }
-                                      });
-                                    },
-                                    child: Icon(
-                                      Icons.remove,
-                                      size: 20,
-                                    )),
                                 Text(
-                                  count.toString(),
-                                  style: kCarTitleTextStyle,
+                                  'Quantity:',
+                                  style: kColoredBodyTextStyle,
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      if (count < 5) {
-                                        count++;
-                                      }
-                                    });
-                                  },
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 20,
-                                  ),
+                                Text(
+                                  '1',
+                                  style: kBodyTitlesTextStyle,
                                 ),
                               ],
                             ),
@@ -139,65 +116,65 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        color: Colors.green,
-        height: 60,
-        padding: EdgeInsets.only(bottom: 10),
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        width: double.infinity,
-        child: ReUsableButton(
-          name: 'Proceed',
-          onPressed: () {},
-        ),
-      ),
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.green,
-        title: Text(
-          'Your selections',
-          style: kAppBarTitleTextStyle,
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.green,
+          title: Text(
+            'Check-out',
+            style: kAppBarTitleTextStyle,
           ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: Icon(
-              Icons.notifications_none_outlined,
+              Icons.arrow_back,
               color: Colors.white,
             ),
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              _buildSingleCarSelection(),
-
-              SizedBox(
-                height: 20,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.notifications_none_outlined,
+                color: Colors.white,
               ),
-              // ReUsableButton(
-              //   name: 'Book a ride',
-              //   onPressed: () {},
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
-    );
+        body: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Check-out',
+              style: kCarTitleTextStyle,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            _buildSingleCarSelection(),
+            _buildSingleCarSelection(),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total cost: ',
+                  style: kColoredBodyTextStyle,
+                ),
+                Text(
+                  widget.price.toStringAsFixed(2),
+                  style: kBodyTitlesTextStyle,
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 }
