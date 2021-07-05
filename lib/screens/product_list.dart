@@ -1,14 +1,19 @@
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:car_rental_app/widgets/grid_view.dart' as myGrid;
 
 class ListProducts extends StatelessWidget {
   final String name;
-  final String? image;
-  final String? description;
-  final double? price;
+  final String image;
+  final String description;
+  final double price;
 
-  ListProducts({required this.name, this.image, this.price, this.description});
+  ListProducts(
+      {required this.name,
+      required this.image,
+      required this.price,
+      required this.description});
 
   Widget _buildFeaturedCars({
     required String name,
@@ -136,11 +141,25 @@ class ListProducts extends StatelessWidget {
                       child: myGrid.MyGrid(
                         child: Column(
                           children: [
-                            _buildFeaturedCars(
-                              name: 'SUVs',
-                              image: 'car3.jpg',
-                              price: 4499.00,
-                              description: '1. This is the description.',
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (c) => DetailsPage(
+                                      name: name,
+                                      image: image,
+                                      price: price,
+                                      type: 'New',
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: _buildFeaturedCars(
+                                name: 'SUVs',
+                                image: 'car3.jpg',
+                                price: 4499.00,
+                                description: '1. This is the description.',
+                              ),
                             ),
                             _buildFeaturedCars(
                               name: 'SUVs',

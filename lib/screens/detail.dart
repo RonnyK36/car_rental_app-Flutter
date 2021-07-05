@@ -1,14 +1,19 @@
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
-  final String? name;
-  final String? image;
-  final String? description;
-  final double? price;
+  final String name;
+  final String image;
+  final String type;
+  final double price;
 
-  DetailsPage({this.name, this.image, this.price, this.description});
+  DetailsPage(
+      {required this.name,
+      required this.image,
+      required this.price,
+      required this.type});
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -97,7 +102,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         height: 250,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(widget.image!),
+                            image: AssetImage('images/${widget.image}'),
                           ),
                         ),
                       ),
@@ -121,7 +126,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.name!,
+                                widget.name,
                                 style: kBodyTitlesTextStyle,
                               ),
                               SizedBox(
@@ -131,7 +136,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 children: [
                                   Text('Kshs: '),
                                   Text(
-                                    widget.price!.toStringAsFixed(2),
+                                    widget.price.toStringAsFixed(2),
                                     style: kPriceTextStyle,
                                   ),
                                 ],
@@ -151,7 +156,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Wrap(
                   children: [
                     Text(
-                      widget.description!,
+                      widget.type,
                       style: kBodyTextStyle,
                     ),
                   ],
@@ -256,7 +261,14 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               ReUsableButton(
                 name: 'Book a ride',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (c) => CartScreen(
+                          image: widget.image,
+                          price: widget.price,
+                          name: widget.name,
+                          type: widget.type)));
+                },
               ),
             ],
           ),

@@ -22,6 +22,12 @@ const kBodyTextStyle = TextStyle(
   color: Colors.black,
   letterSpacing: 2,
 );
+const kSmallBodyTextStyle = TextStyle(
+  fontSize: 15,
+  color: Colors.black,
+  letterSpacing: 2,
+  fontWeight: FontWeight.bold,
+);
 const kBodyTitlesTextStyle = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
@@ -39,4 +45,10 @@ const kPriceTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Colors.green,
   letterSpacing: 2,
+);
+const kColoredBodyTextStyle = TextStyle(
+  fontSize: 15,
+  color: Colors.green,
+  letterSpacing: 2,
+  fontWeight: FontWeight.bold,
 );

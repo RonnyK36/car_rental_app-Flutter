@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _key,
       backgroundColor: Colors.white,
@@ -119,15 +118,7 @@ class _HomePageState extends State<HomePage> {
                         style: kBodyTitlesTextStyle,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (c) => ListProducts(
-                                name: 'Categories',
-                              ),
-                            ),
-                          );
-                        },
+                        onTap: () {},
                         child: Text(
                           'Show more',
                           style: kBodyTitlesTextStyle,
@@ -211,15 +202,7 @@ class _HomePageState extends State<HomePage> {
                                   style: kBodyTitlesTextStyle,
                                 ),
                                 GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (c) => ListProducts(
-                                          name: 'Features',
-                                        ),
-                                      ),
-                                    );
-                                  },
+                                  onTap: () {},
                                   child: Text(
                                     'See all',
                                     style: kBodyTitlesTextStyle,
@@ -241,15 +224,43 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           children: [
-                            SingleProductCard(
-                              name: 'SUVs',
-                              image: 'car2.jpg',
-                              price: 4499.00,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (c) => DetailsPage(
+                                      name: 'SUVs',
+                                      image: 'car2.jpg',
+                                      price: 4499.00,
+                                      type: 'Range',
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: SingleProductCard(
+                                name: 'SUVs',
+                                image: 'car2.jpg',
+                                price: 4499.00,
+                              ),
                             ),
-                            SingleProductCard(
-                              name: 'Saloon Cars',
-                              image: 'car5.jpg',
-                              price: 5999.00,
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (c) => DetailsPage(
+                                      name: 'Saloon Cars',
+                                      image: 'car5.jpg',
+                                      price: 4499.00,
+                                      type: 'Sedan',
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: SingleProductCard(
+                                name: 'Saloon Cars',
+                                image: 'car5.jpg',
+                                price: 5999.00,
+                              ),
                             ),
                           ],
                         ),
@@ -275,15 +286,43 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Row(
                   children: [
-                    SingleProductCard(
-                      name: 'Mercedes Benz',
-                      image: 'car3.jpg',
-                      price: 1499.00,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (c) => DetailsPage(
+                              name: 'Mercedes Benz',
+                              image: 'car3.jpg',
+                              price: 1499.00,
+                              type: 'German machine',
+                            ),
+                          ),
+                        );
+                      },
+                      child: SingleProductCard(
+                        name: 'Mercedes Benz',
+                        image: 'car3.jpg',
+                        price: 1499.00,
+                      ),
                     ),
-                    SingleProductCard(
-                      name: 'Race Car',
-                      image: 'projects-5.jpg',
-                      price: 2499.00,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (c) => DetailsPage(
+                              name: 'Race Car',
+                              image: 'projects-5.jpg',
+                              price: 2499.00,
+                              type: 'German machine',
+                            ),
+                          ),
+                        );
+                      },
+                      child: SingleProductCard(
+                        name: 'Race Car',
+                        image: 'projects-5.jpg',
+                        price: 2499.00,
+                      ),
                     ),
                   ],
                 ),

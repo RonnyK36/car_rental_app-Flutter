@@ -3,7 +3,17 @@ import 'package:car_rental_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({Key? key}) : super(key: key);
+  final double price;
+  final String image;
+  final String name;
+  final String type;
+
+  CartScreen({
+    required this.image,
+    required this.price,
+    required this.name,
+    required this.type,
+  });
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -32,7 +42,7 @@ class _CartScreenState extends State<CartScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('images/car2.jpg'),
+                        image: AssetImage('images/${widget.image}'),
                       ),
                     ),
                   ),
@@ -46,16 +56,24 @@ class _CartScreenState extends State<CartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Title',
-                          style: kBodyTitlesTextStyle,
+                          widget.name,
+                          style: kSmallBodyTextStyle,
                         ),
                         Text(
-                          'Type',
+                          widget.type,
                           style: kBodyTextStyle,
                         ),
-                        Text(
-                          '4,599',
-                          style: kBodyTextStyle,
+                        Row(
+                          children: [
+                            Text(
+                              'Kshs. ',
+                              style: kColoredBodyTextStyle,
+                            ),
+                            Text(
+                              widget.price.toStringAsFixed(2),
+                              style: kBodyTextStyle,
+                            ),
+                          ],
                         ),
                         SizedBox(height: 10),
                         Container(
@@ -115,6 +133,15 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Container(
+        color: Colors.green,
+        height: 40,
+        width: double.infinity,
+        child: ReUsableButton(
+          name: 'Proceed',
+          onPressed: () {},
+        ),
+      ),
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         centerTitle: true,
@@ -148,19 +175,17 @@ class _CartScreenState extends State<CartScreen> {
           child: Column(
             children: [
               _buildSingleCarSelection(),
-              _buildSingleCarSelection(),
-              _buildSingleCarSelection(),
-              _buildSingleCarSelection(),
+
               SizedBox(
                 height: 20,
               ),
-              ReUsableButton(
-                name: 'Book a ride',
-                onPressed: () {},
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              // ReUsableButton(
+              //   name: 'Book a ride',
+              //   onPressed: () {},
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
             ],
           ),
         ),

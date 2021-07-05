@@ -18,6 +18,7 @@ class SingleProductCard extends StatelessWidget {
         height: 160,
         width: 160,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 100,
@@ -31,12 +32,20 @@ class SingleProductCard extends StatelessWidget {
               ),
             ),
             Text(
-              price.toStringAsFixed(2),
-              style: kBodyTextStyle,
-            ),
-            Text(
               name,
               style: kCarTitleTextStyle,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Kshs. ',
+                  style: kColoredBodyTextStyle,
+                ),
+                Text(
+                  price.toStringAsFixed(2),
+                  style: kBodyTextStyle,
+                ),
+              ],
             ),
           ],
         ),
