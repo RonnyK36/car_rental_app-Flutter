@@ -46,9 +46,21 @@ const kPriceTextStyle = TextStyle(
   color: Colors.green,
   letterSpacing: 2,
 );
+const kTotalPriceTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  color: Colors.red,
+  letterSpacing: 2,
+);
 const kColoredBodyTextStyle = TextStyle(
   fontSize: 15,
   color: Colors.green,
+  letterSpacing: 2,
+  fontWeight: FontWeight.bold,
+);
+const kBigColoredBodyTextStyle = TextStyle(
+  fontSize: 19,
+  color: Colors.red,
   letterSpacing: 2,
   fontWeight: FontWeight.bold,
 );

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       home: CheckOut(
         name: 'Alfa Romeo',
         image: 'car5.jpg',
-        price: 3000,
+        price: 3099,
         type: 'Luxury',
       ),
     );
