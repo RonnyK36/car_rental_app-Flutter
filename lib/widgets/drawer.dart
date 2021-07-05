@@ -12,6 +12,7 @@ bool homeColor = true;
 bool collectionColor = false;
 bool contactUsColor = false;
 bool aboutColor = false;
+bool favoriteColor = false;
 
 class _MyDrawerState extends State<MyDrawer> {
   @override
@@ -49,6 +50,27 @@ class _MyDrawerState extends State<MyDrawer> {
                 collectionColor = false;
                 contactUsColor = false;
                 aboutColor = false;
+                favoriteColor = false;
+              });
+            },
+          ),
+          ListTile(
+            selected: favoriteColor,
+            enabled: true,
+            leading: Icon(Icons.favorite_border_outlined),
+            title: Text(
+              'Favorites',
+              style: TextStyle(
+                  fontSize: 17,
+                  color: favoriteColor ? Colors.blue : Colors.black),
+            ),
+            onTap: () {
+              setState(() {
+                favoriteColor = true;
+                homeColor = false;
+                collectionColor = false;
+                contactUsColor = false;
+                aboutColor = false;
               });
             },
           ),
@@ -68,6 +90,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 homeColor = false;
                 contactUsColor = false;
                 aboutColor = false;
+                favoriteColor = false;
               });
             },
           ),
@@ -87,6 +110,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 collectionColor = false;
                 homeColor = false;
                 aboutColor = false;
+                favoriteColor = false;
               });
             },
           ),
@@ -105,6 +129,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 collectionColor = false;
                 contactUsColor = false;
                 homeColor = false;
+                favoriteColor = false;
               });
             },
           ),

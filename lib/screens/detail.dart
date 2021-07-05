@@ -65,7 +65,7 @@ class _DetailsPageState extends State<DetailsPage> {
         backgroundColor: Colors.green,
         title: Text(
           'Details',
-          style: kBodyTitlesTextStyle,
+          style: kAppBarTitleTextStyle,
         ),
         leading: IconButton(
           onPressed: () {
@@ -73,7 +73,7 @@ class _DetailsPageState extends State<DetailsPage> {
           },
           icon: Icon(
             Icons.arrow_back,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         actions: [
@@ -81,7 +81,7 @@ class _DetailsPageState extends State<DetailsPage> {
             onPressed: () {},
             icon: Icon(
               Icons.notifications_none_outlined,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ],

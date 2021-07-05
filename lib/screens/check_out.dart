@@ -1,3 +1,4 @@
+import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class _CheckOutState extends State<CheckOut> {
                             style: kBodyTextStyle,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Kshs. ',
@@ -178,55 +180,68 @@ class _CheckOutState extends State<CheckOut> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Check-out',
-            style: kCarTitleTextStyle,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          _buildSingleCarSelection(),
-          _buildSingleCarSelection(),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 130,
-            width: double.infinity,
-            child: Card(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 15),
-                    child: _buildBottomSheet(
-                        fieldName: 'Sub-total:',
-                        price: widget.price.toStringAsFixed(2)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: _buildBottomSheet(
-                        fieldName: 'Discounts:', price: '200'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: _buildBottomSheet(
-                        fieldName: 'Delivery fee:', price: '600'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: _buildTotalsBottomSheet(
-                        fieldName: 'Total cost:', price: '3499.00'),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
               ),
-            ),
+              Text(
+                'Check-out',
+                style: kCarTitleTextStyle,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              _buildSingleCarSelection(),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 130,
+                width: double.infinity,
+                child: Card(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10, top: 15),
+                        child: _buildBottomSheet(
+                            fieldName: 'Sub-total:',
+                            price: widget.price.toStringAsFixed(2)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: _buildBottomSheet(
+                            fieldName: 'Discounts:', price: '200'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: _buildBottomSheet(
+                            fieldName: 'Delivery fee:', price: '600'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: _buildTotalsBottomSheet(
+                            fieldName: 'Total cost:', price: '3499.00'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ReUsableButton(
+                name: 'Pay Now',
+                onPressed: () {},
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

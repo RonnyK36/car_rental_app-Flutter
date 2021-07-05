@@ -1,5 +1,6 @@
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/check_out.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
@@ -69,6 +70,7 @@ class _CartScreenState extends State<CartScreen> {
                             style: kBodyTextStyle,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Kshs. ',
@@ -140,14 +142,21 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        color: Colors.green,
-        height: 60,
+        // color: Colors.green,
+        height: 65,
         padding: EdgeInsets.only(bottom: 10),
-        margin: EdgeInsets.symmetric(horizontal: 10),
+
         width: double.infinity,
         child: ReUsableButton(
-          name: 'Proceed',
-          onPressed: () {},
+          name: 'Proceed to check-out',
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (c) => CheckOut(
+                    image: widget.image,
+                    price: widget.price,
+                    name: widget.name,
+                    type: widget.type)));
+          },
         ),
       ),
       backgroundColor: Colors.grey[100],

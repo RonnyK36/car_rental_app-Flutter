@@ -26,12 +26,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CheckOut(
-        name: 'Alfa Romeo',
-        image: 'car5.jpg',
-        price: 3099,
-        type: 'Luxury',
-      ),
+      home: HomePage(),
     );
   }
 }
+// name: 'Alfa Romeo',
+// image: 'car5.jpg',
+// price: 3099,
+// type: 'Luxury',

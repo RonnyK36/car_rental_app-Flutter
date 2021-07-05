@@ -8,20 +8,23 @@ class ReUsableButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            primary: Colors.green,
           ),
-          primary: Colors.green,
-        ),
-        onPressed: onPressed,
-        child: Text(
-          name,
-          style: kButtonTextStyle,
+          onPressed: onPressed,
+          child: Text(
+            name,
+            style: kButtonTextStyle,
+          ),
         ),
       ),
     );
