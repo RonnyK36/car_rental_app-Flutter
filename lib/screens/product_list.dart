@@ -18,13 +18,13 @@ class ListProducts extends StatelessWidget {
   }) {
     return Card(
       child: Container(
-        height: 160,
-        width: 160,
+        height: 200,
+        width: double.infinity,
         child: Column(
           children: [
             Container(
-              height: 100,
-              width: 150,
+              height: 130,
+              width: double.infinity,
               // color: Colors.green,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -131,11 +131,29 @@ class ListProducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 800,
+                      height: 520,
                       width: 350,
                       child: myGrid.MyGrid(
                         child: Column(
                           children: [
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'car3.jpg',
+                              price: 4499.00,
+                              description: '1. This is the description.',
+                            ),
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'car2.jpg',
+                              price: 4499.00,
+                              description: '2. This is the description.',
+                            ),
+                            _buildFeaturedCars(
+                              name: 'SUVs',
+                              image: 'car5.jpg',
+                              price: 4499.00,
+                              description: '3. This is the description.',
+                            ),
                             _buildFeaturedCars(
                               name: 'SUVs',
                               image: 'car3.jpg',
@@ -151,12 +169,6 @@ class ListProducts extends StatelessWidget {
                             _buildFeaturedCars(
                               name: 'SUVs',
                               image: 'car5.jpg',
-                              price: 4499.00,
-                              description: 'This is the description.',
-                            ),
-                            _buildFeaturedCars(
-                              name: 'SUVs',
-                              image: 'images/projects-5.jpeg',
                               price: 4499.00,
                               description: 'This is the description.',
                             ),

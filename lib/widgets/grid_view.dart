@@ -21,21 +21,11 @@ class MyGrid extends StatelessWidget {
     return Scaffold(
       body: GridView.count(
         scrollDirection: Axis.vertical,
-        crossAxisCount: 2,
-        semanticChildCount: 3,
-        childAspectRatio: 0.3,
-        children: List.generate(2, (index) {
+        crossAxisCount: 1,
+        childAspectRatio: 0.2,
+        children: List.generate(1, (index) {
           return GestureDetector(
             onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (c) => DetailsPage(
-              //               name: name,
-              //               price: price,
-              //               description: description,
-              //               image: image,
-              //             )));
               print('Clicked card');
             },
             child: Container(

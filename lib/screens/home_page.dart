@@ -5,6 +5,7 @@ import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:car_rental_app/widgets/drawer.dart';
 import 'package:car_rental_app/widgets/single_product_card.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -281,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SingleProductCard(
                       name: 'Race Car',
-                      image: 'projects-5.jpeg',
+                      image: 'projects-5.jpg',
                       price: 2499.00,
                     ),
                   ],
