@@ -3,8 +3,8 @@ import 'package:car_rental_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
-  MyDrawer({required this.userName, this.phone});
-  final String userName;
+  MyDrawer({this.userName, this.phone});
+  final String? userName;
   final String? phone;
 
   @override
@@ -33,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
               style: kBodyTitlesTextStyle,
             ),
             accountEmail: Text(
-              widget.userName,
+              'ronnykelvyne3@gmail',
               style: kBodyTextStyle,
             ),
             decoration: BoxDecoration(color: Colors.green),

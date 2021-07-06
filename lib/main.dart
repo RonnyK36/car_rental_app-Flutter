@@ -31,7 +31,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// name: 'Alfa Romeo',
-// image: 'car5.jpg',
-// price: 3099,
-// type: 'Luxury',

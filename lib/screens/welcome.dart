@@ -16,9 +16,9 @@ class WelcomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 300,
+            height: 250,
             width: double.infinity,
-            // color: Colors.green,
+            color: Colors.white,
             child: Image(
               fit: BoxFit.cover,
               image: AssetImage('images/car5.jpg'),
