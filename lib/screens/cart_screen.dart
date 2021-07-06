@@ -3,6 +3,8 @@ import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/check_out.dart';
 import 'package:flutter/material.dart';
 
+import 'image_preview.dart';
+
 class CartScreen extends StatefulWidget {
   final double price;
   final String image;
@@ -39,13 +41,19 @@ class _CartScreenState extends State<CartScreen> {
                   flex: 7,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 132,
-                      width: 160,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('images/${widget.image}'),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (c) => ImagePreview(image: widget.image)));
+                      },
+                      child: Container(
+                        height: 132,
+                        width: 160,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('images/${widget.image}'),
+                          ),
                         ),
                       ),
                     ),

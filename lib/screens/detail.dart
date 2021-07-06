@@ -1,6 +1,7 @@
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/cart_screen.dart';
+import 'package:car_rental_app/screens/image_preview.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -22,13 +23,15 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   int count = 1;
 
-  Widget _buildTypeCards({required String label}) {
+  Widget _buildTypeCards(
+      {required String label,
+      required Color color,
+      required VoidCallback onTap}) {
     return GestureDetector(
-      onTap: () {
-        print('Card clicked');
-      },
+      onTap: onTap,
       child: Card(
         elevation: 5,
+        color: color,
         child: Container(
           height: 60,
           width: 60,
@@ -39,21 +42,36 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget _buildColorCards({required Color color}) {
+  Widget _buildColorCards(
+      {required Color color,
+      required Color selectedColor,
+      required VoidCallback onTap}) {
     return GestureDetector(
-      onTap: () {
-        print('Color card clicked');
-      },
-      child: Card(
-        elevation: 5,
-        child: Container(
-          color: color,
-          height: 50,
-          width: 50,
+      onTap: onTap,
+      child: Container(
+        color: selectedColor,
+        height: 55,
+        child: Card(
+          elevation: 5,
+          child: Container(
+            color: color,
+            height: 50,
+            width: 50,
+          ),
         ),
       ),
     );
   }
+
+  bool awdColor = true;
+  bool fwdColor = false;
+  bool bwdColor = false;
+  bool fourColor = false;
+  bool blackColor = true;
+  bool whiteColor = false;
+  bool greyColor = false;
+  bool blueColor = false;
+  bool redColor = false;
 
   @override
   Widget build(BuildContext context) {
@@ -93,16 +111,22 @@ class _DetailsPageState extends State<DetailsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Container(
-                  height: 250,
-                  child: Card(
-                    child: Container(
-                      padding: EdgeInsets.all(10),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (c) => ImagePreview(image: widget.image)));
+                  },
+                  child: Container(
+                    height: 250,
+                    child: Card(
                       child: Container(
-                        height: 250,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('images/${widget.image}'),
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                          height: 250,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('images/${widget.image}'),
+                            ),
                           ),
                         ),
                       ),
@@ -174,10 +198,54 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _buildTypeCards(label: 'AWD'),
-                    _buildTypeCards(label: 'FWD'),
-                    _buildTypeCards(label: 'BWD'),
-                    _buildTypeCards(label: '4X4'),
+                    _buildTypeCards(
+                      label: 'AWD',
+                      color: awdColor ? Colors.green : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          awdColor = true;
+                          fwdColor = false;
+                          bwdColor = false;
+                          fourColor = false;
+                        });
+                      },
+                    ),
+                    _buildTypeCards(
+                      label: 'FWD',
+                      color: fwdColor ? Colors.green : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          awdColor = false;
+                          fwdColor = true;
+                          bwdColor = false;
+                          fourColor = false;
+                        });
+                      },
+                    ),
+                    _buildTypeCards(
+                      label: 'BWD',
+                      color: bwdColor ? Colors.green : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          awdColor = false;
+                          fwdColor = false;
+                          bwdColor = true;
+                          fourColor = false;
+                        });
+                      },
+                    ),
+                    _buildTypeCards(
+                      label: '4X4',
+                      color: fourColor ? Colors.green : Colors.white,
+                      onTap: () {
+                        setState(() {
+                          awdColor = false;
+                          fwdColor = false;
+                          bwdColor = false;
+                          fourColor = true;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -196,11 +264,76 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _buildColorCards(color: Colors.black),
-                    _buildColorCards(color: Colors.white),
-                    _buildColorCards(color: Colors.grey),
-                    _buildColorCards(color: Colors.blue),
-                    _buildColorCards(color: Colors.red),
+                    _buildColorCards(
+                      color: Colors.black,
+                      selectedColor:
+                          blackColor ? Colors.green : Color(0xfff5f5f5),
+                      onTap: () {
+                        setState(() {
+                          blackColor = true;
+                          whiteColor = false;
+                          greyColor = false;
+                          blueColor = false;
+                          redColor = false;
+                        });
+                      },
+                    ),
+                    _buildColorCards(
+                      color: Colors.white,
+                      selectedColor:
+                          whiteColor ? Colors.green : Color(0xfff5f5f5),
+                      onTap: () {
+                        setState(() {
+                          blackColor = false;
+                          whiteColor = true;
+                          greyColor = false;
+                          blueColor = false;
+                          redColor = false;
+                        });
+                      },
+                    ),
+                    _buildColorCards(
+                      color: Colors.grey,
+                      selectedColor:
+                          greyColor ? Colors.green : Color(0xfff5f5f5),
+                      onTap: () {
+                        setState(() {
+                          blackColor = false;
+                          whiteColor = false;
+                          greyColor = true;
+                          blueColor = false;
+                          redColor = false;
+                        });
+                      },
+                    ),
+                    _buildColorCards(
+                      color: Colors.blue,
+                      selectedColor:
+                          blueColor ? Colors.green : Color(0xfff5f5f5),
+                      onTap: () {
+                        setState(() {
+                          blackColor = false;
+                          whiteColor = false;
+                          greyColor = false;
+                          blueColor = true;
+                          redColor = false;
+                        });
+                      },
+                    ),
+                    _buildColorCards(
+                      color: Colors.red,
+                      selectedColor:
+                          redColor ? Colors.green : Color(0xfff5f5f5),
+                      onTap: () {
+                        setState(() {
+                          blackColor = false;
+                          whiteColor = false;
+                          greyColor = false;
+                          blueColor = false;
+                          redColor = true;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),

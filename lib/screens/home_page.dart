@@ -36,10 +36,17 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCategories({required String name, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
-      child: CircleAvatar(
-        maxRadius: 25,
-        backgroundImage: AssetImage('images/$name.jpg'),
-        // backgroundColor: Colors.white,
+      child: Row(
+        children: [
+          CircleAvatar(
+            maxRadius: 25,
+            backgroundImage: AssetImage('images/$name.jpg'),
+            // backgroundColor: Colors.white,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+        ],
       ),
     );
   }
@@ -127,44 +134,71 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                Card(
-                  // color: Colors.green,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildCategories(
-                          name: 'vw',
-                          onTap: () {
-                            print('VolksWagon selected');
-                          },
-                        ),
-                        _buildCategories(
-                          name: 'benz',
-                          onTap: () {
-                            print('Mercedes-Benz selected');
-                          },
-                        ),
-                        _buildCategories(
-                          name: 'nissan',
-                          onTap: () {
-                            print('Nissan selected');
-                          },
-                        ),
-                        _buildCategories(
-                          name: 'mazda',
-                          onTap: () {
-                            print('Mazda selected');
-                          },
-                        ),
-                        _buildCategories(
-                          name: 'infiniti',
-                          onTap: () {
-                            print('Infiniti selected');
-                          },
-                        ),
-                      ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Card(
+                    // color: Colors.green,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildCategories(
+                            name: 'vw',
+                            onTap: () {
+                              print('VolksWagon selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'nissan',
+                            onTap: () {
+                              print('VolksWagon selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'toyota_logo',
+                            onTap: () {
+                              print('VolksWagon selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'benz',
+                            onTap: () {
+                              print('Mercedes-Benz selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'bmw',
+                            onTap: () {
+                              print('Mercedes-Benz selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'maserati_logo',
+                            onTap: () {
+                              print('Mercedes-Benz selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'honda_logo',
+                            onTap: () {
+                              print('Nissan selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'mazda',
+                            onTap: () {
+                              print('Mazda selected');
+                            },
+                          ),
+                          _buildCategories(
+                            name: 'infiniti',
+                            onTap: () {
+                              print('Infiniti selected');
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
             color: Colors.white,
             child: Image(
               fit: BoxFit.cover,
-              image: AssetImage('images/car5.jpg'),
+              image: AssetImage('images/welcome1.png'),
             ),
           ),
           SizedBox(height: 20),
