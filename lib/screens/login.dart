@@ -30,7 +30,7 @@ class _LoginState extends State<Login> {
     final FormState? _form = _formKey.currentState;
     if (!_form!.validate()) {
       try {
-        UserCredential result = await FirebaseAuth.instance
+        AuthResult result = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email!, password: password!);
         Navigator.push(
             context,

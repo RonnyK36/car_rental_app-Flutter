@@ -5,20 +5,18 @@ import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/screens/login.dart';
 import 'package:car_rental_app/screens/product_list.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:car_rental_app/screens/welcome.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   final String userName = 'Kevin';
-  // final String email = 'kevin@gmail';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +25,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        // home: StreamBuilder<User?>(
+        //   stream: FirebaseAuth.instance.authStateChange(),
+        //   builder: (_, snapshot) {
+        //     final isSignedIn = snapshot.data != null;
+        //     return isSignedIn ? HomePage() : Login();
+        //   },
+        // ),
+        builder: (_, snapShot) {
+          if (snapShot.hasData) {
+            return HomePage();
+          } else {
+            return Login();
+          }
+        },
+      ),
     );
   }
 }

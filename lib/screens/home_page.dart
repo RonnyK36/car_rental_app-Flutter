@@ -6,6 +6,7 @@ import 'package:car_rental_app/widgets/drawer.dart';
 import 'package:car_rental_app/widgets/single_product_card.dart';
 import 'package:car_rental_app/widgets/text_input.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -106,265 +107,366 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 40,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: FutureBuilder(
+          future: Firestore.instance
+              .collection('products')
+              .document('thisistheid')
+              .collection('featuredProducts')
+              .getDocuments(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        'Categories',
-                        style: kBodyTitlesTextStyle,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          'Show more',
-                          style: kBodyTitlesTextStyle,
+                      Container(
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Categories',
+                              style: kBodyTitlesTextStyle,
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                'Show more',
+                                style: kBodyTitlesTextStyle,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Card(
-                    // color: Colors.green,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildCategories(
-                            name: 'vw',
-                            onTap: () {
-                              print('VolksWagon selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'nissan',
-                            onTap: () {
-                              print('VolksWagon selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'toyota_logo',
-                            onTap: () {
-                              print('VolksWagon selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'benz',
-                            onTap: () {
-                              print('Mercedes-Benz selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'bmw',
-                            onTap: () {
-                              print('Mercedes-Benz selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'maserati_logo',
-                            onTap: () {
-                              print('Mercedes-Benz selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'honda_logo',
-                            onTap: () {
-                              print('Nissan selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'mazda',
-                            onTap: () {
-                              print('Mazda selected');
-                            },
-                          ),
-                          _buildCategories(
-                            name: 'infiniti',
-                            onTap: () {
-                              print('Infiniti selected');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  width: double.infinity,
-                  // color: Colors.green,
-                  child: Column(
-                    children: [
-                      // TextFormField(
-                      //   decoration: InputDecoration(
-                      //     border: OutlineInputBorder(
-                      //       borderRadius: BorderRadius.circular(30),
-                      //     ),
-                      //     hintText: 'Find a car',
-                      //     hintStyle: TextStyle(
-                      //       fontSize: 17,
-                      //     ),
-                      //     prefixIcon: Icon(Icons.search_outlined),
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: 10,
-                      ),
-
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Card(
+                          elevation: 0,
+                          // color: Colors.green,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
-                                  'Featured',
-                                  style: kBodyTitlesTextStyle,
+                                _buildCategories(
+                                  name: 'toyota_logo',
+                                  onTap: () {
+                                    print('VolksWagon selected');
+                                  },
                                 ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Text(
-                                    'See all',
-                                    style: kBodyTitlesTextStyle,
-                                  ),
+                                _buildCategories(
+                                  name: 'nissan',
+                                  onTap: () {
+                                    print('VolksWagon selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'bmw',
+                                  onTap: () {
+                                    print('Mercedes-Benz selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'benz',
+                                  onTap: () {
+                                    print('Mercedes-Benz selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'vw',
+                                  onTap: () {
+                                    print('VolksWagon selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'maserati_logo',
+                                  onTap: () {
+                                    print('Mercedes-Benz selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'honda_logo',
+                                  onTap: () {
+                                    print('Nissan selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'mazda',
+                                  onTap: () {
+                                    print('Mazda selected');
+                                  },
+                                ),
+                                _buildCategories(
+                                  name: 'infiniti',
+                                  onTap: () {
+                                    print('Infiniti selected');
+                                  },
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                        width: double.infinity,
+                        // color: Colors.green,
+                        child: Column(
+                          children: [
+                            // TextFormField(
+                            //   decoration: InputDecoration(
+                            //     border: OutlineInputBorder(
+                            //       borderRadius: BorderRadius.circular(30),
+                            //     ),
+                            //     hintText: 'Find a car',
+                            //     hintStyle: TextStyle(
+                            //       fontSize: 17,
+                            //     ),
+                            //     prefixIcon: Icon(Icons.search_outlined),
+                            //   ),
+                            // ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Featured',
+                                        style: kBodyTitlesTextStyle,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Text(
+                                          'See all',
+                                          style: kBodyTitlesTextStyle,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (c) => DetailsPage(
+                      Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Card(
+                              elevation: 0,
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (c) => DetailsPage(
+                                            name: 'SUVs',
+                                            image: 'car2.jpg',
+                                            price: 4499.00,
+                                            type: 'Range',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: SingleProductCard(
                                       name: 'SUVs',
                                       image: 'car2.jpg',
                                       price: 4499.00,
-                                      type: 'Range',
                                     ),
                                   ),
-                                );
-                              },
-                              child: SingleProductCard(
-                                name: 'SUVs',
-                                image: 'car2.jpg',
-                                price: 4499.00,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (c) => DetailsPage(
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (c) => DetailsPage(
+                                            name: 'SUVs',
+                                            image: 'projects-5.jpg',
+                                            price: 4499.00,
+                                            type: 'Range',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: SingleProductCard(
+                                      name: 'SUVs',
+                                      image: 'projects-5.jpg',
+                                      price: 4499.00,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (c) => DetailsPage(
+                                            name: 'SUVs',
+                                            image: 'car3.jpg',
+                                            price: 4499.00,
+                                            type: 'Range',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: SingleProductCard(
+                                      name: 'SUVs',
+                                      image: 'car3.jpg',
+                                      price: 4499.00,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (c) => DetailsPage(
+                                            name: 'Saloon Cars',
+                                            image: 'car5.jpg',
+                                            price: 4499.00,
+                                            type: 'Sedan',
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: SingleProductCard(
                                       name: 'Saloon Cars',
                                       image: 'car5.jpg',
-                                      price: 4499.00,
-                                      type: 'Sedan',
+                                      price: 5999.00,
                                     ),
                                   ),
-                                );
-                              },
-                              child: SingleProductCard(
-                                name: 'Saloon Cars',
-                                image: 'car5.jpg',
-                                price: 5999.00,
+                                ],
                               ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'New in Town',
+                              style: kBodyTitlesTextStyle,
+                            ),
+                            Text(
+                              'See all',
+                              style: kBodyTitlesTextStyle,
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 80,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'New in Town',
-                        style: kBodyTitlesTextStyle,
                       ),
-                      Text(
-                        'See all',
-                        style: kBodyTitlesTextStyle,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Card(
+                          elevation: 0,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'SUVs',
+                                        image: 'car3.jpg',
+                                        price: 4499.00,
+                                        type: 'Range',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'SUVs',
+                                  image: 'car3.jpg',
+                                  price: 4499.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Saloon Cars',
+                                        image: 'car5.jpg',
+                                        price: 4499.00,
+                                        type: 'Sedan',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Saloon Cars',
+                                  image: 'car5.jpg',
+                                  price: 5999.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Mercedes Benz',
+                                        image: 'car2.jpg',
+                                        price: 1499.00,
+                                        type: 'German machine',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Mercedes Benz',
+                                  image: 'car2.jpg',
+                                  price: 1499.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Race Car',
+                                        image: 'projects-5.jpg',
+                                        price: 2499.00,
+                                        type: 'German machine',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Race Car',
+                                  image: 'projects-5.jpg',
+                                  price: 2499.00,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (c) => DetailsPage(
-                              name: 'Mercedes Benz',
-                              image: 'car3.jpg',
-                              price: 1499.00,
-                              type: 'German machine',
-                            ),
-                          ),
-                        );
-                      },
-                      child: SingleProductCard(
-                        name: 'Mercedes Benz',
-                        image: 'car3.jpg',
-                        price: 1499.00,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (c) => DetailsPage(
-                              name: 'Race Car',
-                              image: 'projects-5.jpg',
-                              price: 2499.00,
-                              type: 'German machine',
-                            ),
-                          ),
-                        );
-                      },
-                      child: SingleProductCard(
-                        name: 'Race Car',
-                        image: 'projects-5.jpg',
-                        price: 2499.00,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 }
