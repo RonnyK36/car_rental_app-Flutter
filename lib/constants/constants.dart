@@ -9,7 +9,7 @@ const kButtonTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 const kTitleTextStyle = TextStyle(
-  fontSize: 40,
+  fontSize: 30,
   fontWeight: FontWeight.w600,
 );
 

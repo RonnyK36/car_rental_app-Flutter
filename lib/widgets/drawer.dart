@@ -1,8 +1,11 @@
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+  MyDrawer({required this.userName, this.phone});
+  final String userName;
+  final String? phone;
 
   @override
   _MyDrawerState createState() => _MyDrawerState();
@@ -30,7 +33,7 @@ class _MyDrawerState extends State<MyDrawer> {
               style: kBodyTitlesTextStyle,
             ),
             accountEmail: Text(
-              'ronny@gmail.com',
+              widget.userName,
               style: kBodyTextStyle,
             ),
             decoration: BoxDecoration(color: Colors.green),
@@ -52,6 +55,9 @@ class _MyDrawerState extends State<MyDrawer> {
                 aboutColor = false;
                 favoriteColor = false;
               });
+
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (c) => HomePage()));
             },
           ),
           ListTile(

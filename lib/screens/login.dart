@@ -35,7 +35,9 @@ class _LoginState extends State<Login> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (c) => HomePage(email: result.user!.email)));
+                builder: (c) => HomePage(
+                      email: result.user!.email,
+                    )));
         print(result.user!.uid);
       } on PlatformException catch (e) {
         print(e.message!.toString());

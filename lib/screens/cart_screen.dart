@@ -25,7 +25,7 @@ class _CartScreenState extends State<CartScreen> {
 
   Widget _buildSingleCarSelection() {
     return Container(
-      height: 160,
+      height: 170,
       width: double.infinity,
       child: Card(
         elevation: 5,

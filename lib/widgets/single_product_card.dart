@@ -17,6 +17,7 @@ class SingleProductCard extends StatelessWidget {
       child: Container(
         height: 160,
         width: 160,
+        padding: EdgeInsets.only(left: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

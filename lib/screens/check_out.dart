@@ -213,17 +213,17 @@ class _CheckOutState extends State<CheckOut> {
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: _buildBottomSheet(
-                            fieldName: 'Discounts:', price: '200'),
+                            fieldName: 'Discounts:', price: '200.00'),
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10),
                         child: _buildBottomSheet(
-                            fieldName: 'Delivery fee:', price: '600'),
+                            fieldName: 'Delivery fee:', price: '600.00'),
                       ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: _buildTotalsBottomSheet(
-                            fieldName: 'Total cost:', price: '3499.00'),
+                            fieldName: 'Total cost:', price: '4899.00'),
                       ),
                     ],
                   ),

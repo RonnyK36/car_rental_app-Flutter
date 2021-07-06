@@ -49,7 +49,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _key,
       backgroundColor: Colors.white,
-      drawer: MyDrawer(),
+      drawer: MyDrawer(
+        userName: widget.email!,
+        phone: widget.userName!,
+      ),
       appBar: AppBar(
         backgroundColor: Colors.green[600],
         title: Row(
