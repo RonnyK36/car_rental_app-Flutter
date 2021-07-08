@@ -1,5 +1,7 @@
 import 'package:car_rental_app/constants/constants.dart';
+import 'package:car_rental_app/models/products.dart';
 import 'package:car_rental_app/screens/detail.dart';
+import 'package:car_rental_app/screens/show_room.dart';
 import 'package:car_rental_app/widgets/drawer.dart';
 import 'package:car_rental_app/widgets/single_product_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,16 +9,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage(
-      {Key? key,
-      this.email,
-      this.userName,
-      this.name,
-      this.image,
-      this.price,
-      this.type,
-      this.description})
-      : super(key: key);
+  HomePage({
+    Key? key,
+    this.email,
+    this.userName,
+    this.name,
+    this.image,
+    this.price,
+    this.type,
+    this.description,
+  }) : super(key: key);
   final String? email;
   final String? userName;
   final String? name;
@@ -28,6 +30,8 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
+Products? koege;
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -105,12 +109,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: FutureBuilder(
-          future: Firestore.instance
-              .collection('featuredProducts')
-              .document('9jiIYqp8sskVvEkAs83Z')
-              .collection('featured')
-              .getDocuments(),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: Firestore.instance.collection('items').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -120,6 +120,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             }
+
+            koege = Products(
+                // image: snapshot.data!.documents[0]["image"],
+                price: snapshot.data!.documents[0]['price'],
+                image: 'images/projects-5.jpg',
+                name: snapshot.data!.documents[0]['name'],
+                type: snapshot.data!.documents[0]['type']);
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -185,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                                 _buildCategories(
                                   name: 'vw',
                                   onTap: () {
-                                    print('VolksWagon selected');
+                                    print('VolksWagen selected');
                                   },
                                 ),
                                 _buildCategories(
@@ -253,7 +261,11 @@ class _HomePageState extends State<HomePage> {
                                         style: kBodyTitlesTextStyle,
                                       ),
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Route route = MaterialPageRoute(
+                                              builder: (c) => ShowRoom());
+                                          Navigator.push(context, route);
+                                        },
                                         child: Text(
                                           'See all',
                                           style: kBodyTitlesTextStyle,
@@ -281,18 +293,19 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (c) => DetailsPage(
-                                            name: 'SUVs',
-                                            image: 'car2.jpg',
-                                            price: 4499.00,
-                                            type: 'Range',
+                                            name: koege!.name,
+                                            image: koege!.name,
+                                            price: 5000,
+                                            type: koege!.type,
                                           ),
                                         ),
                                       );
                                     },
                                     child: SingleProductCard(
-                                      name: 'SUVs',
-                                      image: 'car2.jpg',
-                                      price: 4499.00,
+                                      name: koege!.name,
+                                      // type: koege!.type,
+                                      image: koege!.image,
+                                      price: 7000,
                                     ),
                                   ),
                                   GestureDetector(
