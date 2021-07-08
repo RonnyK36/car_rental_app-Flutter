@@ -22,6 +22,11 @@ const kBodyTextStyle = TextStyle(
   color: Colors.black,
   letterSpacing: 2,
 );
+const kWhiteBodyTextStyle = TextStyle(
+  fontSize: 17,
+  color: Colors.white,
+  letterSpacing: 2,
+);
 const kSmallBodyTextStyle = TextStyle(
   fontSize: 15,
   color: Colors.black,
@@ -32,6 +37,12 @@ const kBodyTitlesTextStyle = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
   color: Colors.black,
+  letterSpacing: 2,
+);
+const kWhiteBodyTitlesTextStyle = TextStyle(
+  fontSize: 19,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
   letterSpacing: 2,
 );
 const kCarTitleTextStyle = TextStyle(

@@ -1,11 +1,7 @@
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/detail.dart';
-import 'package:car_rental_app/screens/product_list.dart';
-import 'package:car_rental_app/screens/sign_up.dart';
 import 'package:car_rental_app/widgets/drawer.dart';
 import 'package:car_rental_app/widgets/single_product_card.dart';
-import 'package:car_rental_app/widgets/text_input.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +14,7 @@ class HomePage extends StatefulWidget {
       this.name,
       this.image,
       this.price,
+      this.type,
       this.description})
       : super(key: key);
   final String? email;
@@ -25,6 +22,7 @@ class HomePage extends StatefulWidget {
   final String? name;
   final String? image;
   final String? description;
+  final String? type;
   final double? price;
 
   @override
@@ -109,15 +107,16 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder(
           future: Firestore.instance
-              .collection('products')
-              .document('thisistheid')
               .collection('featuredProducts')
+              .document('9jiIYqp8sskVvEkAs83Z')
+              .collection('featured')
               .getDocuments(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.white,
+                  color: Colors.green,
                 ),
               );
             }
@@ -373,6 +372,92 @@ class _HomePageState extends State<HomePage> {
                               style: kBodyTitlesTextStyle,
                             ),
                           ],
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Card(
+                          elevation: 0,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'SUVs',
+                                        image: 'car3.jpg',
+                                        price: 4499.00,
+                                        type: 'Range',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'SUVs',
+                                  image: 'car3.jpg',
+                                  price: 4499.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Saloon Cars',
+                                        image: 'car5.jpg',
+                                        price: 4499.00,
+                                        type: 'Sedan',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Saloon Cars',
+                                  image: 'car5.jpg',
+                                  price: 5999.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Mercedes Benz',
+                                        image: 'car2.jpg',
+                                        price: 1499.00,
+                                        type: 'German machine',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Mercedes Benz',
+                                  image: 'car2.jpg',
+                                  price: 1499.00,
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (c) => DetailsPage(
+                                        name: 'Race Car',
+                                        image: 'projects-5.jpg',
+                                        price: 2499.00,
+                                        type: 'German machine',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: SingleProductCard(
+                                  name: 'Race Car',
+                                  image: 'projects-5.jpg',
+                                  price: 2499.00,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SingleChildScrollView(

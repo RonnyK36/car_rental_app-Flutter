@@ -1,5 +1,6 @@
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -16,6 +17,17 @@ bool collectionColor = false;
 bool contactUsColor = false;
 bool aboutColor = false;
 bool favoriteColor = false;
+// void _signOut() async{
+//   FirebaseAuth.instance.signOut();
+//   Future<FirebaseUser> Function() user =await FirebaseAuth.instance.currentUser;
+//   //print('$user');
+//   runApp(
+//       new MaterialApp(
+//         home: new Login(),
+//       )
+//
+//   );
+// }
 
 class _MyDrawerState extends State<MyDrawer> {
   @override
@@ -23,29 +35,34 @@ class _MyDrawerState extends State<MyDrawer> {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage('images/vw.jpg'),
+          Center(
+            child: UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage('images/vw.jpg'),
+              ),
+              accountName: Text(
+                'Kevin',
+                style: kWhiteBodyTitlesTextStyle,
+              ),
+              accountEmail: Text(
+                'ronnykelvyne3@gmail.com',
+                style: kBodyTextStyle,
+              ),
+              decoration: BoxDecoration(color: Colors.green[400]),
             ),
-            accountName: Text(
-              'Kevin',
-              style: kBodyTitlesTextStyle,
-            ),
-            accountEmail: Text(
-              'ronnykelvyne3@gmail',
-              style: kBodyTextStyle,
-            ),
-            decoration: BoxDecoration(color: Colors.green),
           ),
           ListTile(
             selected: homeColor,
             enabled: true,
-            leading: Icon(Icons.home),
+            leading: Icon(
+              Icons.home,
+              color: Colors.green,
+            ),
             title: Text(
               'Home',
               style: TextStyle(
-                  fontSize: 17, color: homeColor ? Colors.blue : Colors.black),
+                  fontSize: 17, color: homeColor ? Colors.green : Colors.black),
             ),
             onTap: () {
               setState(() {
@@ -63,12 +80,15 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             selected: favoriteColor,
             enabled: true,
-            leading: Icon(Icons.favorite_border_outlined),
+            leading: Icon(
+              Icons.favorite_border_outlined,
+              color: Colors.green,
+            ),
             title: Text(
               'Favorites',
               style: TextStyle(
                   fontSize: 17,
-                  color: favoriteColor ? Colors.blue : Colors.black),
+                  color: favoriteColor ? Colors.green : Colors.black),
             ),
             onTap: () {
               setState(() {
@@ -83,12 +103,12 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             selected: collectionColor,
             enabled: true,
-            leading: Icon(Icons.car_repair),
+            leading: Icon(Icons.car_repair, color: Colors.green),
             title: Text(
               'Collection',
               style: TextStyle(
                   fontSize: 17,
-                  color: collectionColor ? Colors.blue : Colors.black),
+                  color: collectionColor ? Colors.green : Colors.black),
             ),
             onTap: () {
               setState(() {
@@ -103,12 +123,12 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             selected: contactUsColor,
             enabled: true,
-            leading: Icon(Icons.phone),
+            leading: Icon(Icons.phone, color: Colors.green),
             title: Text(
               'Contact us',
               style: TextStyle(
                   fontSize: 17,
-                  color: contactUsColor ? Colors.blue : Colors.black),
+                  color: contactUsColor ? Colors.green : Colors.black),
             ),
             onTap: () {
               setState(() {
@@ -123,11 +143,15 @@ class _MyDrawerState extends State<MyDrawer> {
           ListTile(
             selected: aboutColor,
             enabled: true,
-            leading: Icon(Icons.info_outline),
+            leading: Icon(
+              Icons.info_outline,
+              color: Colors.green,
+            ),
             title: Text(
               'About',
               style: TextStyle(
-                  fontSize: 17, color: aboutColor ? Colors.blue : Colors.black),
+                  fontSize: 17,
+                  color: aboutColor ? Colors.green : Colors.black),
             ),
             onTap: () {
               setState(() {
@@ -141,14 +165,17 @@ class _MyDrawerState extends State<MyDrawer> {
           ),
           ListTile(
             enabled: true,
-            leading: Icon(Icons.logout),
+            leading: Icon(
+              Icons.logout,
+              color: Colors.red,
+            ),
             title: Text(
               'Logout',
-              style: TextStyle(
-                fontSize: 17,
-              ),
+              style: TextStyle(fontSize: 17, color: Colors.red),
             ),
-            onTap: () {},
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+            },
           ),
         ],
       ),
