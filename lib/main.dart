@@ -1,4 +1,6 @@
 import 'package:car_rental_app/screens/home_page.dart';
+import 'package:car_rental_app/screens/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -22,17 +24,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
-      // home: StreamBuilder(
-      //   stream: FirebaseAuth.instance.onAuthStateChanged,
-      //   builder: (_, snapShot) {
-      //     if (snapShot.data != null) {
-      //       return HomePage();
-      //     } else {
-      //       return Login();
-      //     }
-      //   },
-      // ),
+      // home: HomePage(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        builder: (_, snapShot) {
+          if (snapShot.data != null) {
+            return HomePage();
+          } else {
+            return Login();
+          }
+        },
+      ),
     );
   }
 }
