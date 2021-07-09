@@ -1,9 +1,8 @@
 import 'package:car_rental_app/constants/constants.dart';
-import 'package:car_rental_app/models/products.dart';
-import 'package:car_rental_app/screens/detail.dart';
 import 'package:car_rental_app/screens/show_room.dart';
 import 'package:car_rental_app/widgets/drawer.dart';
 import 'package:car_rental_app/widgets/single_product_card.dart';
+import 'package:car_rental_app/widgets/single_showroom_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-Products? koege;
+// Products? koege;
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('items').snapshots(),
+          stream: Firestore.instance.collection('user').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -121,12 +120,12 @@ class _HomePageState extends State<HomePage> {
               );
             }
 
-            koege = Products(
-                // image: snapshot.data!.documents[0]["image"],
-                price: snapshot.data!.documents[0]['price'],
-                image: 'images/projects-5.jpg',
-                name: snapshot.data!.documents[0]['name'],
-                type: snapshot.data!.documents[0]['type']);
+            // koege = Products(
+            //     // image: snapshot.data!.documents[0]["image"],
+            //     price: snapshot.data!.documents[0]['price'],
+            //     image: 'images/projects-5.jpg',
+            //     name: snapshot.data!.documents[0]['name'],
+            //     type: snapshot.data!.documents[0]['type']);
 
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -232,22 +231,9 @@ class _HomePageState extends State<HomePage> {
                         // color: Colors.green,
                         child: Column(
                           children: [
-                            // TextFormField(
-                            //   decoration: InputDecoration(
-                            //     border: OutlineInputBorder(
-                            //       borderRadius: BorderRadius.circular(30),
-                            //     ),
-                            //     hintText: 'Find a car',
-                            //     hintStyle: TextStyle(
-                            //       fontSize: 17,
-                            //     ),
-                            //     prefixIcon: Icon(Icons.search_outlined),
-                            //   ),
-                            // ),
                             SizedBox(
                               height: 10,
                             ),
-
                             Container(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -288,82 +274,30 @@ class _HomePageState extends State<HomePage> {
                               elevation: 0,
                               child: Row(
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (c) => DetailsPage(
-                                            name: koege!.name,
-                                            image: koege!.name,
-                                            price: 5000,
-                                            type: koege!.type,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: SingleProductCard(
-                                      name: koege!.name,
-                                      // type: koege!.type,
-                                      image: koege!.image,
-                                      price: 7000,
-                                    ),
+                                  SingleProductCard(
+                                    type: 'Sedan',
+                                    name: 'BMW',
+                                    // type: koege!.type,
+                                    image: 'car2.jpg',
+                                    price: 7000,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (c) => DetailsPage(
-                                            name: 'SUVs',
-                                            image: 'projects-5.jpg',
-                                            price: 4499.00,
-                                            type: 'Range',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: SingleProductCard(
-                                      name: 'SUVs',
-                                      image: 'projects-5.jpg',
-                                      price: 4499.00,
-                                    ),
+                                  SingleProductCard(
+                                    type: 'Luxury, VIP',
+                                    name: 'Ferrari 458',
+                                    image: 'ferrari_458.jpg',
+                                    price: 4499.00,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (c) => DetailsPage(
-                                            name: 'SUVs',
-                                            image: 'car3.jpg',
-                                            price: 4499.00,
-                                            type: 'Range',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: SingleProductCard(
-                                      name: 'SUVs',
-                                      image: 'car3.jpg',
-                                      price: 4499.00,
-                                    ),
+                                  SingleProductCard(
+                                    type: 'Luxury, VIP',
+                                    name: 'Chevrolet',
+                                    image: 'chevrolet_camaro.jpg',
+                                    price: 4499.00,
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (c) => DetailsPage(
-                                            name: 'Saloon Cars',
-                                            image: 'car5.jpg',
-                                            price: 4499.00,
-                                            type: 'Sedan',
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: SingleProductCard(
-                                      name: 'Saloon Cars',
-                                      image: 'car5.jpg',
-                                      price: 5999.00,
-                                    ),
+                                  SingleProductCard(
+                                    type: 'Race car',
+                                    name: 'Nissan GTR',
+                                    image: 'nissan_gtr_r35_skyline.jpg',
+                                    price: 5999.00,
                                   ),
                                 ],
                               ),
@@ -380,180 +314,83 @@ class _HomePageState extends State<HomePage> {
                               'New in Town',
                               style: kBodyTitlesTextStyle,
                             ),
-                            Text(
-                              'See all',
-                              style: kBodyTitlesTextStyle,
+                            GestureDetector(
+                              onTap: () {
+                                Route route = MaterialPageRoute(
+                                    builder: (c) => ShowRoom());
+                                Navigator.push(context, route);
+                              },
+                              child: Text(
+                                'See all',
+                                style: kBodyTitlesTextStyle,
+                              ),
                             ),
                           ],
                         ),
                       ),
                       SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.vertical,
                         child: Card(
                           elevation: 0,
-                          child: Row(
+                          child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'SUVs',
-                                        image: 'car3.jpg',
-                                        price: 4499.00,
-                                        type: 'Range',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'SUVs',
-                                  image: 'car3.jpg',
-                                  price: 4499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'SUV',
+                                name: 'Range Rover',
+                                image: 'car2.jpg',
+                                price: 4499.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Saloon Cars',
-                                        image: 'car5.jpg',
-                                        price: 4499.00,
-                                        type: 'Sedan',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Saloon Cars',
-                                  image: 'car5.jpg',
-                                  price: 5999.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'Saloon Cars',
+                                name: 'Toyota',
+                                image: 'car5.jpg',
+                                price: 5999.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Mercedes Benz',
-                                        image: 'car2.jpg',
-                                        price: 1499.00,
-                                        type: 'German machine',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Mercedes Benz',
-                                  image: 'car2.jpg',
-                                  price: 1499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'German steel',
+                                name: 'Mercedes Benz',
+                                image: 'car3.jpg',
+                                price: 1499.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Race Car',
-                                        image: 'projects-5.jpg',
-                                        price: 2499.00,
-                                        type: 'German machine',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Race Car',
-                                  image: 'projects-5.jpg',
-                                  price: 2499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'Race Car',
+                                name: 'Nissan Skyline',
+                                image: 'nissan_gtr_r35_skyline.jpg',
+                                price: 2499.00,
                               ),
                             ],
                           ),
                         ),
                       ),
                       SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.vertical,
                         child: Card(
                           elevation: 0,
-                          child: Row(
+                          child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'SUVs',
-                                        image: 'car3.jpg',
-                                        price: 4499.00,
-                                        type: 'Range',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'SUVs',
-                                  image: 'car3.jpg',
-                                  price: 4499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'German Steel',
+                                name: 'Mercedes',
+                                image: 'car3.jpg',
+                                price: 4499.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Saloon Cars',
-                                        image: 'car5.jpg',
-                                        price: 4499.00,
-                                        type: 'Sedan',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Saloon Cars',
-                                  image: 'car5.jpg',
-                                  price: 5999.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'Race car',
+                                name: 'Peugeot',
+                                image: 'car5.jpg',
+                                price: 5999.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Mercedes Benz',
-                                        image: 'car2.jpg',
-                                        price: 1499.00,
-                                        type: 'German machine',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Mercedes Benz',
-                                  image: 'car2.jpg',
-                                  price: 1499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'SUV',
+                                name: 'Range rover',
+                                image: 'car2.jpg',
+                                price: 1499.00,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (c) => DetailsPage(
-                                        name: 'Race Car',
-                                        image: 'projects-5.jpg',
-                                        price: 2499.00,
-                                        type: 'German machine',
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: SingleProductCard(
-                                  name: 'Race Car',
-                                  image: 'projects-5.jpg',
-                                  price: 2499.00,
-                                ),
+                              SingleShowRoomCard(
+                                type: 'Race Car',
+                                name: 'Peugeot',
+                                image: 'projects-5.jpg',
+                                price: 2499.00,
                               ),
                             ],
                           ),

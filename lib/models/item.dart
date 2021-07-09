@@ -1,22 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  String? title;
-  String? shortInfo;
+  String? name;
+  String? type;
   Timestamp? publishedDate;
   String? thumbnailUrl;
-  String? longDescription;
+  String? description;
   String? status;
   int? price;
   String? address;
   int? phone;
 
   UserModel({
-    this.title,
-    this.shortInfo,
+    this.name,
+    this.type,
     this.publishedDate,
     this.thumbnailUrl,
-    this.longDescription,
+    this.description,
     this.status,
     this.phone,
     this.price,
@@ -24,11 +24,11 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    shortInfo = json['shortInfo'];
+    name = json['title'];
+    type = json['shortInfo'];
     publishedDate = json['publishedDate'];
     thumbnailUrl = json['thumbnailUrl'];
-    longDescription = json['longDescription'];
+    description = json['longDescription'];
     status = json['status'];
     price = json['price'];
     // phone = json['phone'];
@@ -37,14 +37,14 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['title'] = this.title;
-    data['shortInfo'] = this.shortInfo;
+    data['title'] = this.name;
+    data['shortInfo'] = this.type;
     data['price'] = this.price;
     if (this.publishedDate != null) {
       data['publishedDate'] = this.publishedDate;
     }
     data['thumbnailUrl'] = this.thumbnailUrl;
-    data['longDescription'] = this.longDescription;
+    data['longDescription'] = this.description;
     data['status'] = this.status;
     data['address'] = this.address;
     data['phone'] = this.phone;

@@ -1,6 +1,6 @@
 import 'package:car_rental_app/components/my_button.dart';
 import 'package:car_rental_app/constants/constants.dart';
-import 'package:car_rental_app/screens/cart_screen.dart';
+import 'package:car_rental_app/screens/check_out.dart';
 import 'package:car_rental_app/screens/image_preview.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +22,8 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   int count = 1;
+
+  get image => widget.image;
 
   Widget _buildTypeCards(
       {required String label,
@@ -125,7 +127,8 @@ class _DetailsPageState extends State<DetailsPage> {
                           height: 250,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage('images/${widget.image}'),
+                              //changed from widget.image
+                              image: AssetImage('images/$image'),
                             ),
                           ),
                         ),
@@ -396,12 +399,24 @@ class _DetailsPageState extends State<DetailsPage> {
                 name: 'Book a ride',
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (c) => CartScreen(
-                          image: widget.image,
-                          price: widget.price,
-                          name: widget.name,
-                          type: widget.type)));
+                      builder: (c) => CheckOut(
+                            image: widget.image,
+                            price: widget.price,
+                            name: widget.name,
+                            type: widget.type,
+                            quantity: count,
+                          )));
                 },
+                // onPressed: () {
+                // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //     builder: (c) => CartScreen(
+                //           image: widget.image,
+                //           price: widget.price,
+                //           name: widget.name,
+                //           type: widget.type,
+                //           quantity: count,
+                //         )));
+                // },
               ),
             ],
           ),

@@ -1,16 +1,8 @@
 import 'package:car_rental_app/screens/home_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'constants/car_rental.dart';
 
 Future<void> main() async {
-  CarRentalApp.auth = FirebaseAuth.instance;
-  CarRentalApp.sharedPreferences = await SharedPreferences.getInstance();
-  CarRentalApp.firestore = Firestore.instance;
-
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
