@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
 class Products {
   final String name;
   final String image;
-  final double price;
+  final String price;
   final String type;
 
   Products({
@@ -13,3 +11,17 @@ class Products {
     required this.type,
   });
 }
+//
+// class Products {
+//   final String? name;
+//   final String? image;
+//   final double? price;
+//   final String? type;
+//
+//   Products({
+//     this.image,
+//     this.price,
+//     this.name,
+//     this.type,
+//   });
+// }

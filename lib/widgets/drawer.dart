@@ -1,3 +1,4 @@
+import 'package:car_rental_app/Admin/uploadItems.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +18,7 @@ bool collectionColor = false;
 bool contactUsColor = false;
 bool aboutColor = false;
 bool favoriteColor = false;
+bool uploadColor = false;
 // void _signOut() async{
 //   FirebaseAuth.instance.signOut();
 //   Future<FirebaseUser> Function() user =await FirebaseAuth.instance.currentUser;
@@ -27,7 +29,9 @@ bool favoriteColor = false;
 //       )
 //
 //   );
-// }
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
+}
 
 class _MyDrawerState extends State<MyDrawer> {
   @override
@@ -71,10 +75,37 @@ class _MyDrawerState extends State<MyDrawer> {
                 contactUsColor = false;
                 aboutColor = false;
                 favoriteColor = false;
+                uploadColor = false;
               });
 
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (c) => HomePage()));
+            },
+          ),
+          ListTile(
+            selected: homeColor,
+            enabled: true,
+            leading: Icon(
+              Icons.upload_rounded,
+              color: Colors.green,
+            ),
+            title: Text(
+              'Upload',
+              style: TextStyle(
+                  fontSize: 17,
+                  color: uploadColor ? Colors.green : Colors.black),
+            ),
+            onTap: () {
+              setState(() {
+                uploadColor = true;
+                collectionColor = false;
+                contactUsColor = false;
+                aboutColor = false;
+                favoriteColor = false;
+              });
+
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (c) => UploadPage()));
             },
           ),
           ListTile(
@@ -97,6 +128,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 collectionColor = false;
                 contactUsColor = false;
                 aboutColor = false;
+                uploadColor = false;
               });
             },
           ),
@@ -117,6 +149,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 contactUsColor = false;
                 aboutColor = false;
                 favoriteColor = false;
+                uploadColor = false;
               });
             },
           ),
@@ -137,6 +170,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 homeColor = false;
                 aboutColor = false;
                 favoriteColor = false;
+                uploadColor = false;
               });
             },
           ),
@@ -160,6 +194,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 contactUsColor = false;
                 homeColor = false;
                 favoriteColor = false;
+                uploadColor = false;
               });
             },
           ),
@@ -174,7 +209,8 @@ class _MyDrawerState extends State<MyDrawer> {
               style: TextStyle(fontSize: 17, color: Colors.red),
             ),
             onTap: () {
-              FirebaseAuth.instance.signOut();
+              _signOut();
+              Navigator.of(context).pop();
             },
           ),
         ],

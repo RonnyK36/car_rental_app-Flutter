@@ -1,7 +1,7 @@
+import 'package:car_rental_app/Admin/adminLogin.dart';
 import 'package:car_rental_app/components/bottom_auth_row.dart';
 import 'package:car_rental_app/components/email_text_input.dart';
 import 'package:car_rental_app/components/my_button.dart';
-import 'package:car_rental_app/components/password_text_input.dart';
 import 'package:car_rental_app/constants/constants.dart';
 import 'package:car_rental_app/screens/home_page.dart';
 import 'package:car_rental_app/screens/sign_up.dart';
@@ -125,6 +125,15 @@ class _LoginState extends State<Login> {
                         },
                         name: 'Login',
                       ),
+                      ReUsableButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (c) => AdminSignInPage()));
+                        },
+                        name: 'Login as admin',
+                      ),
+
                       // Row to toggle btwn login and signup
                       BottomRow(
                         name: 'SignUp',

@@ -8,12 +8,14 @@ class CheckOut extends StatefulWidget {
   final String image;
   final String name;
   final String type;
+  final int quantity;
 
   CheckOut({
     required this.image,
     required this.price,
     required this.name,
     required this.type,
+    required this.quantity,
   });
 
   @override
@@ -22,6 +24,7 @@ class CheckOut extends StatefulWidget {
 
 class _CheckOutState extends State<CheckOut> {
   int count = 1;
+
   Widget _buildSingleCarSelection() {
     return Container(
       height: 160,
@@ -97,7 +100,7 @@ class _CheckOutState extends State<CheckOut> {
                                   style: kColoredBodyTextStyle,
                                 ),
                                 Text(
-                                  '1',
+                                  widget.quantity.toString(),
                                   style: kBodyTitlesTextStyle,
                                 ),
                               ],
@@ -183,6 +186,7 @@ class _CheckOutState extends State<CheckOut> {
       body: SingleChildScrollView(
         child: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 height: 10,
@@ -207,7 +211,7 @@ class _CheckOutState extends State<CheckOut> {
                       Padding(
                         padding: EdgeInsets.only(left: 10, right: 10, top: 15),
                         child: _buildBottomSheet(
-                            fieldName: 'Sub-total:',
+                            fieldName: 'Unit price:',
                             price: widget.price.toStringAsFixed(2)),
                       ),
                       Padding(
@@ -223,7 +227,9 @@ class _CheckOutState extends State<CheckOut> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: _buildTotalsBottomSheet(
-                            fieldName: 'Total cost:', price: '4899.00'),
+                            fieldName: 'Total cost:',
+                            price: (widget.price * widget.quantity + 400)
+                                .toStringAsFixed(2)),
                       ),
                     ],
                   ),
